@@ -6,7 +6,7 @@ async function upgrade (version) {
 
   console.info('Finding wiki container...')
   const containers = await dk.listContainers({ all: true })
-  const wiki = containers.find(c => c.Names.some(n => n === '/wiki' || n === 'wiki'))
+  const wiki = containers.find(c => c.Names.some(n => n.match('wiki(-\\d)?$')))
   if (!wiki) {
     throw new Error('Could not find wiki container.')
   }
